@@ -1,0 +1,12 @@
+.ui-random-text {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  color: coral;
+  -ms-writing-mode: tb-lr;
+      writing-mode: vertical-lr;
+}
+.ui-backgroud-body {
+  border-radius: 50%;
+  box-shadow: grey 10px 10px 10px 0;
+}

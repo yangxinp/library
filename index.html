@@ -1,0 +1,61 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./dist/main.css" />
+  </head>
+  <body>
+    <div id="app">
+      <ui-button :size="btnSize" @click="sizeTrigger"
+        >点击改变大小的VueButton</ui-button
+      >
+    </div>
+
+    <!-- CDN 引入 Vue3 （用户可指定版本） -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- CDN 引入组件库 （虽然是本地，后续可以将该文件提交至 CDN） -->
+    <script src="./dist/library.js"></script>
+    <!-- 原有逻辑 -->
+    <script>
+      // 随机数文本节点
+      var randomText = window.library.createRandomTextElement();
+      document.body.appendChild(randomText);
+
+      // 显示浏览器类型
+      var browserText = document.createElement("div");
+      browserText.innerHTML = window.library.browser();
+      document.body.appendChild(browserText);
+
+      // 添加图片 callback -> Promise
+      window.library
+        .createBackgroudImg("https://hxin.link/images/avatar.jpg")
+        .then(function (el) {
+          document.body.appendChild(el);
+        });
+    </script>
+    <!-- 使用 Vue、组件库 -->
+    <script>
+      // Vue
+      var option = {
+        data() {
+          return {
+            btnSize: "mini",
+          };
+        },
+        methods: {
+          sizeTrigger: function () {
+            this.btnSize = this.btnSize === "mini" ? "large" : "mini";
+          },
+        },
+      };
+
+      Vue.createApp(option)
+        .use(library.install) // 安装组件库
+        .mount("#app");
+    </script>
+  </body>
+</html>
